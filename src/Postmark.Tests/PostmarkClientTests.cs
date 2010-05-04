@@ -269,5 +269,21 @@ namespace Postmark.Tests
 
             Console.WriteLine("Postmark -> " + response.Message);
         }
+
+        [Test]
+        public void Can_configure_a_new_API_authority()
+        {
+            var postmark = new PostmarkClient("POSTMARK_API_TEST") { Authority = "http://204.232.182.92" };
+            var email = new PostmarkMessage
+                            {
+                                To = "john@test.com",
+                                From = "john@test.com",
+                                Subject = "Test",
+                                TextBody = "Test body"
+                            };
+            var response = postmark.SendMessage(email);
+            Assert.AreEqual(PostmarkStatus.Success, response.Status);
+            Assert.AreEqual("http://204.232.182.92/email", response.ResponseUri.ToString());
+        }
     }
 }

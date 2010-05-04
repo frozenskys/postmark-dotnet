@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A9DFDACE-1288-4120-B618-695E4FAAF3FD}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -12,6 +12,8 @@
     <AssemblyName>Postmark.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,12 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Postmark\Converters\NameValueCollectionConverter.cs">
-      <Link>Converters\NameValueCollectionConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\Postmark\Converters\UnicodeJsonStringConverter.cs">
-      <Link>Converters\UnicodeJsonStringConverter.cs</Link>
-    </Compile>
     <Compile Include="Converters\UnicodeJsonStringConverterTests.cs" />
     <Compile Include="PostmarkClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

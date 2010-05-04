@@ -52,6 +52,7 @@
 
 #endregion
 
+using System;
 using System.Collections.Specialized;
 using System.Net.Mail;
 using Hammock;
@@ -76,7 +77,6 @@ namespace PostmarkDotNet
     /// </summary>
     public class PostmarkClient
     {
-        private readonly RestClient _client;
         private static readonly JsonSerializerSettings _settings;
         private static readonly PostmarkSerializer _serializer;
 
@@ -103,10 +103,6 @@ namespace PostmarkDotNet
         public PostmarkClient(string serverToken)
         {
             ServerToken = serverToken;
-            _client = new RestClient
-                          {
-                              Authority = "http://api.postmarkapp.com"
-                          };
         }
 
         /// <summary>
@@ -114,6 +110,42 @@ namespace PostmarkDotNet
         /// </summary>
         /// <value>The server token.</value>
         public string ServerToken { get; private set; }
+
+        private string _authority;
+        ///<summary>
+        /// Override the REST API endpoint by specifying your own address.
+        ///</summary>
+        public string Authority 
+        { 
+            get
+            {
+                if (string.IsNullOrEmpty(_authority))
+                    return "http://api.postmarkapp.com";
+                else
+                    return _authority;
+            }
+            set
+            {
+                _authority = value;
+                _client = null;
+            }
+        }
+
+        private RestClient _client;
+
+        private RestClient Client
+        {
+            get
+            {
+                if (_client == null)
+                {
+                    _client = new RestClient {
+                        Authority = Authority
+                    };
+                }
+                return _client;
+            }
+        }
 
         /// <summary>
         /// Sends a message through the Postmark API.
@@ -204,7 +236,7 @@ namespace PostmarkDotNet
 
         private PostmarkResponse GetResponse(RestRequest request)
         {
-            var response = _client.Request(request);
+            var response = this.Client.Request(request);
 
             PostmarkResponse result;
             switch ((int) response.StatusCode)
@@ -231,6 +263,7 @@ namespace PostmarkDotNet
                     break;
             }
 
+            result.ResponseUri = response.ResponseUri;
             return result;
         }
 

@@ -94,3 +94,4 @@ using System.Security;
 
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: InternalsVisibleTo("Postmark.Tests, PublicKey=002400000480000094000000060200000024000052534131000400000100010035e621e49da4bc50e45dc656b9c682421b223aff347673ab5d08b200fa82c047cdfeecbb591a015c42ec0d01cbbc6d6677da64e5b7b8fdc21cfc211a1e9f80908f36781d8fb9bb32e8fc9195ceb1e1aefec1fff075a0320a1d48756f52dd9a0e9bb15598e9cf75de96533ed24e5d6ee1496d2b90ade6659366a8921d9649a6dd")]

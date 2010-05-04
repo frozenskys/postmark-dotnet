@@ -87,5 +87,14 @@ namespace PostmarkDotNet
         /// This does not map to HTTP status codes.
         /// </summary>
         public int ErrorCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the API URI.
+        /// </summary>
+        internal Uri ResponseUri
+        {
+            get;
+            set;
+        }
     }
 }
